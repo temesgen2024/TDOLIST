@@ -1,6 +1,6 @@
+
 const bodyParser = require("body-parser");
 //  Import the express module 
-
 const express = require("express");
 // Import the dotenv module and call the config method to load the environment variables
 require("dotenv").config();
