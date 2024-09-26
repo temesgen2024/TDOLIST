@@ -16,9 +16,11 @@ const getAllTodos = async () => {
 };
 
 // Function to create a new todo
+// Function to create a new todo
 const createTodo = async (title, description) => {
-    const connection = await db.getConnection();
+    let connection; // Declare the connection variable here
     try {
+        connection = await db.pool.getConnection(); // Get the connection
         await connection.beginTransaction();
 
         // Step 1: Insert the description
@@ -34,13 +36,15 @@ const createTodo = async (title, description) => {
         await connection.commit();
         return { todoId: todoResult.insertId, descriptionId };
     } catch (error) {
-        await connection.rollback();
+        if (connection) await connection.rollback(); // Check if connection is defined before rolling back
         console.error("Error creating todo:", error);
         throw error; // Rethrow for further handling
     } finally {
-        connection.release();
+        if (connection) connection.release(); // Release the connection
     }
 };
+
+
 
 // Function to update a todo
 const updateTodo = async (id, completed) => {
