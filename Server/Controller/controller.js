@@ -26,5 +26,18 @@ const createTodo = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
-
-module.exports = { getAllTodos, createTodo };
+const update=async(req,res)=>{
+    const {id}=req.params;
+    const {completed}=req.body;
+    if(!id||!completed){
+        return res.status(400).json({message:'id and completed are required'});
+    }
+    try{
+        const todo=await todoService.update(id,completed);
+        res.status(200).json(todo);
+    }catch(error){
+        console.error("Error updating todo:", error);
+        res.status(500).json({ message: error.message });
+    }
+}
+module.exports = { getAllTodos, createTodo ,update};

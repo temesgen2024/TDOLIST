@@ -54,6 +54,7 @@ const updateTodo = async (id, completed) => {
     } catch (error) {
         console.error("Error updating todo:", error);
         throw error;
+        
     }
 };
 
