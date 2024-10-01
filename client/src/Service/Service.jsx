@@ -1,12 +1,13 @@
 // src/services/todoService.js
+import axios from 'axios';
+
 const API_URL = 'http://localhost:5000'; // Update this with your actual backend URL
 
 // Fetch all todos
 export const fetchTodos = async () => {
     try {
-        const response = await fetch(`http://localhost:5000/todos`);
-        if (!response.ok) throw new Error('Failed to fetch todos');
-        return await response.json();
+        const response = await axios.get(`${API_URL}/todos`);
+        return response.data;
     } catch (error) {
         console.error('Error fetching todos:', error);
         throw error;
@@ -16,15 +17,11 @@ export const fetchTodos = async () => {
 // Create a new todo
 export const createTodo = async (title, description) => {
     try {
-        const response = await fetch(`${API_URL}/create`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ title, description }),
+        const response = await axios.post(`${API_URL}/create`, {
+            title,
+            description,
         });
-        if (!response.ok) throw new Error('Failed to create todo');
-        return await response.json();
+        return response.data;
     } catch (error) {
         console.error('Error creating todo:', error);
         throw error;
@@ -34,31 +31,23 @@ export const createTodo = async (title, description) => {
 // Update a todo's completed status
 export const updateTodo = async (id, completed) => {
     try {
-        const response = await fetch(`${API_URL}/update/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ completed }),
+        const response = await axios.put(`${API_URL}/update/${id}`, {
+            completed,
         });
-        if (!response.ok) throw new Error('Failed to update todo');
-        return await response.json();
+        return response.data;
     } catch (error) {
         console.error('Error updating todo:', error);
         throw error;
     }
 };
 
-// Delete a todo (and its description)
+// Delete a todo
 export const deleteTodo = async (id) => {
     try {
-        const response = await fetch(`${API_URL}/delete/${id}`, {
-            method: 'DELETE',
-        });
-        if (!response.ok) throw new Error('Failed to delete todo');
-        return await response.json();
+        const response = await axios.delete(`${API_URL}/delete/${id}`);
+        return response.data;
     } catch (error) {
         console.error('Error deleting todo:', error);
-        throw error;
-    }
+        throw error;
+    }
 };

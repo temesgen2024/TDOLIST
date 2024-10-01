@@ -1,6 +1,6 @@
 const bodyParser = require("body-parser");
 //  Import the express module 
-
+const cors = require("cors");
 const express = require("express");
 // Import the dotenv module and call the config method to load the environment variables
 require("dotenv").config();
@@ -12,6 +12,7 @@ const router = require("./Routes/todo");
 
 // Create the web server
 const app = express();
+app.use(cors());
 app.use(bodyParser.json()); // Parse JSON bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 
