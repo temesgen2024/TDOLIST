@@ -60,13 +60,37 @@ const updateTodo = async (id, completed) => {
 
 // Function to delete a todo
 const deleteTodo = async (id) => {
+    let connection; // Declare the connection variable here
     try {
-        const results = await db.query('DELETE FROM todos WHERE id = ?', [id]);
-        return results;
+        connection = await db.pool.getConnection(); // Get the connection
+        await connection.beginTransaction();
+
+        // Get the description_id associated with the todo
+        const getDescriptionIdSql = `SELECT description_id FROM todos WHERE id = ?`;
+        const [result] = await connection.query(getDescriptionIdSql, [id]);
+        const descriptionId = result[0]?.description_id;
+
+        // First, delete the todo
+        const deleteTodoSql = `DELETE FROM todos WHERE id = ?`;
+        await connection.query(deleteTodoSql, [id]);
+
+        // Then, delete the description linked to the todo, if it exists
+        if (descriptionId) {
+            const deleteDescriptionSql = `DELETE FROM descriptions WHERE id = ?`;
+            await connection.query(deleteDescriptionSql, [descriptionId]);
+        }
+
+        // Commit the transaction
+        await connection.commit();
+        return { todoDeleted: true, descriptionDeleted: !!descriptionId }; // Return true/false based on description existence
     } catch (error) {
+        if (connection) await connection.rollback(); // Rollback if an error occurs
         console.error("Error deleting todo:", error);
         throw error;
+    } finally {
+        if (connection) connection.release(); // Release the connection
     }
 };
+
 
 module.exports = { getAllTodos, createTodo, updateTodo, deleteTodo };

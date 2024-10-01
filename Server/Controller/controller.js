@@ -33,11 +33,28 @@ const update=async(req,res)=>{
         return res.status(400).json({message:'id and completed are required'});
     }
     try{
-        const todo=await todoService.update(id,completed);
+        const todo=await todoService.updateTodo(id,completed);
         res.status(200).json(todo);
     }catch(error){
         console.error("Error updating todo:", error);
         res.status(500).json({ message: error.message });
     }
 }
-module.exports = { getAllTodos, createTodo ,update};
+const deleteTodo = async (req, res) => {
+    const { id } = req.params;
+
+    if (!id) {
+        return res.status(400).json({ message: 'ID is required.' });
+    }
+
+    try {
+        const todo = await todoService.deleteTodo(id);
+        res.status(200).json(todo);
+    } catch (error) {
+        console.error("Error deleting todo:", error);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+
+module.exports = { getAllTodos, createTodo ,update,deleteTodo};
