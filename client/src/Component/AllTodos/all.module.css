@@ -19,12 +19,15 @@
     margin-bottom: 10%;
 }
 .todo{
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 .frist{
+    
     display: flex;
+    flex-direction: row;
     gap: 15px;
 }
 .add{
@@ -43,3 +46,40 @@ margin-right: 10px;
 .add:hover{
     background-color: #7b2cbf;
 }
+.modal{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.modalContent{
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 40%;
+}
+.conform{
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-right: 10px;
+    border: none;
+}
+.cancel{
+    background-color: gray;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-right: 10px;
+    border: none;
+}
+.edit {display: flex;}
