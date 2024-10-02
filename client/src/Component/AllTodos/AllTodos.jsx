@@ -1,8 +1,10 @@
 // src/components/AllTodos.jsx
 import React, { useEffect, useState } from 'react';
 import { fetchTodos, updateTodo, deleteTodo } from '../../Service/Service'; // Ensure you import deleteTodo
+import { Link } from 'react-router-dom';
 import classes from './all.module.css';
-
+import { MdDelete } from 'react-icons/md';
+import { IoAdd } from 'react-icons/io5';
 function AllTodos() {
     const [todos, setTodos] = useState([]);
 
@@ -37,28 +39,43 @@ function AllTodos() {
     };
 
     return (
-        <div className={classes.allContainer}>
-            <input className={classes.input} type="text" placeholder="Add a new todo" />
+     <div className={classes.allContainer}>
+        
+        <div className={classes.title}>
+<h1>website todo list</h1>
+        </div >
+        <div>
+        <div className={classes.Container}>
+            <h2>Todo List</h2>
             <div>
                 {todos.map((todo) => (
                     <div key={todo.id} className={classes.todo}>
-                        <input
+                       <div className={classes.frist}>
+                       <input
                             className={classes.check}
                             onChange={() => handleToggleTodo(todo.id, todo.completed)}
                             checked={todo.completed}
                             type="checkbox"
                         />
-                        <div className={classes.title}>
+                        <div className={classes.todotitle}>
                             <h3>{todo.title}</h3>
                             <p>{todo.description}</p>
                         </div>
-                        <div className={classes.delete}>
-                            <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
+                       </div>
+                        <div onClick={() => handleDeleteTodo(todo.id)} className={classes.delete}>
+                         <MdDelete size={30} fill='red'/>
                         </div>
                     </div>
                 ))}
             </div>
+            <div className={classes.add}>
+                <Link to="/addtodo">
+                <IoAdd size={30}/>
+                </Link>
+            </div>
+        </div> 
         </div>
+     </div>   
     );
 }
 

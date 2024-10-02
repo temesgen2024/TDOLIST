@@ -1,0 +1,45 @@
+.allContainer{
+    width: 40%;
+    margin: 0 auto;
+
+}
+.title{
+    padding: 20px 0;
+    background-color:  #af7eeb;
+    color: white;
+    border-radius: 8px;
+    margin-bottom: 5%;
+
+}
+.Container{
+   background-color: #E3E9FF; 
+    padding: 30px 20px;
+    border-radius: 8px;
+    position: relative;
+    margin-bottom: 10%;
+}
+.todo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.frist{
+    display: flex;
+    gap: 15px;
+}
+.add{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 25px;
+    background-color:  #af7eeb;
+    color: white;
+    align-items: center;
+margin-bottom: 10px;
+margin-right: 10px;
+}
+.add:hover{
+    background-color: #7b2cbf;
+}
