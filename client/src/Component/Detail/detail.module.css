@@ -1,0 +1,39 @@
+.allContainer{
+    width: 40%;
+    margin: 0 auto;
+
+}
+.title{
+    padding: 20px 0;
+    background-color:  #af7eeb;
+    color: white;
+    border-radius: 8px;
+    margin-bottom: 5%;
+}
+.Container{
+    background-color: #E3E9FF; 
+     padding: 30px 20px;
+     border-radius: 8px;
+     position: relative;
+     margin-bottom: 10%;
+     
+ }
+ .butonContanir{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    margin: 0 auto;
+    background-color: chocolate;
+    color: white;
+    border-radius: 12px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+   transition: all 0.3s; 
+ }
+    .butonContanir:hover{
+        background-color: #7b2cbf;
+        transform: scale(1.1);
+    }

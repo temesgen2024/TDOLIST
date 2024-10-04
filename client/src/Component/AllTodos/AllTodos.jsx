@@ -57,7 +57,7 @@ function AllTodos() {
           <h2>Todo List</h2>
           <div>
             {todos.map((todo) => (
-              <div key={todo.description_id} className={classes.todo}>
+              <div key={todo.id} className={classes.todo}>
                 <div className={classes.first}>
                   <input
                     className={classes.check}
@@ -72,7 +72,7 @@ function AllTodos() {
                 </div>
                 <div className={classes.edit}>
                     <div>
-                    <Link to={`/detail/${todo.description_id}`}><MdEdit size={30}/>
+                    <Link to={`/edit/${todo.id}`}><MdEdit size={30}/>
                     </Link>
                     </div>
                 <div

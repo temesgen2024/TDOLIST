@@ -27,19 +27,19 @@ export const createTodo = async (title, description) => {
         throw error;
     }
 };
-
 // Update a todo's completed status
 export const updateTodo = async (id, completed) => {
     try {
+        // Ensure completed is sent as an integer
         const response = await axios.put(`${API_URL}/update/${id}`, {
-            completed,
+            completed: completed ? 1 : 0, // Send 1 for true, 0 for false
         });
         return response.data;
     } catch (error) {
         console.error('Error updating todo:', error);
         throw error;
     }
-};
+}
 
 // Delete a todo
 export const deleteTodo = async (id) => {

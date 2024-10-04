@@ -4,7 +4,7 @@ const db = require('../dbconfig/db');
 const getAllTodos = async () => {
     try {
         const results = await db.query(`
-            SELECT todos.title, todos.created_at, todos.completed, todos.description_id, descriptions.description 
+            SELECT todos.id, todos.title, todos.created_at, todos.completed, todos.description_id, descriptions.description 
             FROM todos
             LEFT JOIN descriptions ON todos.description_id = descriptions.id
         `);
